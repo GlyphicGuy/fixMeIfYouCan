@@ -1,0 +1,243 @@
+/* === GLOBAL RESET === */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* === BODY / BACKGROUND === */
+body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* === TERMINAL WINDOW === */
+.terminal {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    max-width: 860px;
+    width: 100%;
+    padding: 0;
+    box-shadow: 0 0 40px rgba(0, 255, 65, 0.1), 0 0 80px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+}
+
+/* === TITLE BAR === */
+.status-bar {
+    background: #21262d;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #30363d;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red    { background: #ff5f57; }
+.dot.yellow { background: #febc2e; }
+.dot.green  { background: #28c840; }
+
+.title-bar {
+    flex: 1;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #8b949e;
+}
+
+/* === HEADER === */
+.header {
+    padding: 2rem 2.5rem 1.5rem;
+    border-bottom: 1px solid #30363d;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #00ff41;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    margin-bottom: 0.75rem;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: #f78166;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.bug-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #21262d;
+    border: 1px solid #f78166;
+    border-radius: 4px;
+    padding: 6px 14px;
+}
+
+.bug-label {
+    font-size: 0.8rem;
+    color: #8b949e;
+}
+
+.bug-count {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #f78166;
+}
+
+/* === SECTIONS === */
+.section {
+    padding: 1.5rem 2.5rem;
+    border-bottom: 1px solid #30363d;
+}
+
+.section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    font-size: 0.85rem;
+    color: #58a6ff;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    font-weight: normal;
+}
+
+/* === ENCODED MESSAGE BOX === */
+.encoded-box {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-left: 3px solid #00ff41;
+    border-radius: 4px;
+    padding: 1.2rem 1.5rem;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #8b949e;
+    word-break: break-all;
+    letter-spacing: 1px;
+}
+
+/* === CONTROLS === */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.slider-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.slider-row label {
+    font-size: 0.85rem;
+    color: #8b949e;
+    min-width: 130px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    flex: 1;
+    background: #30363d;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    min-width: 200px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #00ff41;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(0, 255, 65, 0.6);
+}
+
+.shift-val {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #00ff41;
+    min-width: 30px;
+    text-align: center;
+}
+
+/* === DECODE BUTTON === */
+.decode-btn {
+    background: transparent;
+    color: #00ff41;
+    border: 2px solid #00ff41;
+    border-radius: 4px;
+    padding: 10px 28px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.decode-btn:hover {
+    background: rgba(0, 255, 65, 0.1);
+    box-shadow: 0 0 14px rgba(0, 255, 65, 0.4);
+}
+
+.decode-btn:active {
+    background: rgba(0, 255, 65, 0.2);
+}
+
+/* === RESULT BOX === */
+.result-box {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* BUG 2: result text color is the same as the terminal background — text is invisible */
+.result {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-left: 3px solid #58a6ff;
+    border-radius: 4px;
+    padding: 1.2rem 1.5rem;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #0d1117;   /* BUG 2: should be a visible color, e.g. #00ff41 */
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* === FOOTER === */
+.footer {
+    padding: 1rem 2.5rem;
+    border-top: 1px solid #21262d;
+}
+
+.footer p {
+    font-size: 0.75rem;
+    color: #484f58;
+    font-style: italic;
+}
