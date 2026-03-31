@@ -225,7 +225,7 @@ input[type="range"]::-webkit-slider-thumb {
     padding: 1.2rem 1.5rem;
     font-size: 0.9rem;
     line-height: 1.8;
-    color: #0d1117;   /* BUG 2: should be a visible color, e.g. #00ff41 */
+    color: #00ff41;   /* BUG 2: was #0d1117 (same as background), making text invisible */
     white-space: pre-wrap;
     word-break: break-word;
 }

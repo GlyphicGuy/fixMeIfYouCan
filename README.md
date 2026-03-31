@@ -62,6 +62,65 @@ The cipher uses a **shift of 13** (ROT-13). Once all bugs are fixed and you clic
 
 ---
 
+## 🤖 AI Prompt Ideas
+
+Stuck? Try feeding these prompts to an AI assistant (GitHub Copilot, ChatGPT, etc.) to help you track down each bug. They're ordered roughly from "first thing to try" to "I've already stared at this for too long".
+
+### 🔴 Nothing happens when I click the button
+
+```
+My HTML has a button with onclick="decodeMessage()" but clicking it does nothing
+and there's no error. I have a JavaScript file loaded at the bottom of the page.
+What should I check first?
+```
+
+```
+Look at this HTML button and my JavaScript file. Does the function name in the
+onclick attribute exactly match the function defined in the script?
+```
+
+### 🔴 I get a console error when I click Decode
+
+```
+I get "TypeError: Cannot read properties of null (reading 'textContent')" when
+my button is clicked. What does this mean and how do I find the element ID
+that's causing it?
+```
+
+```
+My JavaScript calls document.getElementById() to read some text, but it's
+returning null. How do I find the correct id attribute I should be passing?
+```
+
+### 🔴 The output panel appears but I can't see any text
+
+```
+After clicking the button the result box appears and seems to have content
+(the element is not empty in DevTools), but the text is invisible. What CSS
+property is most likely causing this?
+```
+
+```
+Check my CSS — the .result class styles the decoded output box. Could there be
+a color contrast issue that makes the text invisible against the background?
+```
+
+### 🔴 The decoded text is garbled / letters look wrong
+
+```
+My Caesar cipher decoder outputs almost-readable text but some letters are
+still scrambled. The alphabet has 26 letters. Where in my shift arithmetic
+should I double-check the modulo value?
+```
+
+```
+I'm implementing ROT-N decoding with this formula:
+  ((charCode - 65 - shift + 26) % 25) + 65
+Is the modulo value correct for a 26-letter alphabet?
+```
+
+---
+
 ## 📁 Project Structure
 
 ```
