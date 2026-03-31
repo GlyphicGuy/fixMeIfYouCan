@@ -4,30 +4,44 @@ document.getElementById('shift-input').addEventListener('input', function () {
 });
 
 /**
+ * Applies a Caesar reverse-shift to a plain string (no URL handling).
+ */
+function shiftText(text, shift) {
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+        const charCode = text.charCodeAt(i);
+        if (charCode >= 65 && charCode <= 90) {
+            result += String.fromCharCode(((charCode - 65 - shift + 26) % 26) + 65);
+        } else if (charCode >= 97 && charCode <= 122) {
+            result += String.fromCharCode(((charCode - 97 - shift + 26) % 26) + 97);
+        } else {
+            result += text[i];
+        }
+    }
+    return result;
+}
+
+/**
  * Decodes a Caesar-shifted string by reversing the shift.
- * BUG 3: reads from element id 'cipher-text' — no such element exists.
- *        Should be 'encoded-text'.
- * BUG 4: modulo uses 25 instead of 26, causing one character to always decode wrong.
+ * Any URL present in the input is preserved as-is (not shifted),
+ * while text before and after the URL is decoded normally.
  */
 function decode() {
-    // BUG 3: wrong element ID — 'cipher-text' does not exist in index.html
-    const input = document.getElementById('cipher-text').textContent;
+    const input = document.getElementById('encoded-text').textContent;
     const shift = parseInt(document.getElementById('shift-input').value);
 
-    let result = '';
+    // Detect a URL in the input and preserve it unchanged
+    const urlMatch = input.match(/https?:\/\/[^\s]+/);
+    let result;
 
-    for (let i = 0; i < input.length; i++) {
-        const charCode = input.charCodeAt(i);
-
-        if (charCode >= 65 && charCode <= 90) {
-            // BUG 4: should be % 26 — using 25 corrupts every letter that wraps around
-            result += String.fromCharCode(((charCode - 65 - shift + 26) % 25) + 65);
-        } else if (charCode >= 97 && charCode <= 122) {
-            // BUG 4: same modulo bug for lowercase letters
-            result += String.fromCharCode(((charCode - 97 - shift + 26) % 25) + 97);
-        } else {
-            result += input[i];
-        }
+    if (urlMatch) {
+        const urlStart = urlMatch.index;
+        const urlEnd = urlStart + urlMatch[0].length;
+        result = shiftText(input.substring(0, urlStart), shift)
+               + urlMatch[0]
+               + shiftText(input.substring(urlEnd), shift);
+    } else {
+        result = shiftText(input, shift);
     }
 
     const resultBox = document.getElementById('result-box');
