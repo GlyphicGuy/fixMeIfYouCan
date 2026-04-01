@@ -144,3 +144,11 @@ When all 4 bugs are fixed:
 
 Good luck, hacker. 🕵️
 
+---
+## 🔮 Words of Prophecy [CAUTION!- DO NOT NEGLECT]
+_**Master of extraction,WinRar is your contraption**_
+
+_**The world is connected by networks,You're the beacon in the center**_
+
+_**And your Wifi is connected to the router, Look forward for the shooter**_
+
